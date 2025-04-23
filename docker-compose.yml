@@ -1,0 +1,16 @@
+
+services:
+  fledge-86:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: fledge-86
+    platform: linux/amd64
+    ports:
+      - "8081:8081"
+
+  ui:
+    image: robraesemann/fledge-gui:latest
+    container_name: fledge-ui
+    ports:
+      - "8001:80"
