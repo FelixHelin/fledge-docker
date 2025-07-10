@@ -7,15 +7,14 @@ ARG OS_CODENAME
 
 
 ##### AMD64 section ##### 
-FROM --platform=linux/amd64 ubuntu:focal-20231003 AS stage-amd64
-ARG FLEDGE_DISTRIBUTION=ubuntu2004
+FROM --platform=linux/amd64 ubuntu:jammy-20250619 AS stage-amd64
+ARG FLEDGE_DISTRIBUTION=ubuntu2204
 ARG FLEDGE_PLATFORM=x86_64
-ARG SNAP7_PLATFORM=x86_64
-ARG OS_CODENAME=focal
+ARG OS_CODENAME=jammy
 
 
 ##### ARM/v7 section ##### 
-FROM --platform=linux/arm/v7 debian:bullseye-20231009-slim as stage-arm
+FROM --platform=linux/arm/v7 debian:bullseye-20250630-slim as stage-arm
 ARG FLEDGE_DISTRIBUTION=bullseye
 ARG FLEDGE_PLATFORM=armv7l
 ARG OS_CODENAME=bullseye

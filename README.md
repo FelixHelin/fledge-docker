@@ -2,6 +2,20 @@
 
 This repository contains a Docker setup for running Fledge IoT Platform with PostgreSQL database, built from source. The setup includes both the Fledge core service and a web-based UI made by [Rob Raesemann](https://github.com/RobRaesemann).
 
+## Important Caveat
+
+When building ARM-based Docker images on an AMD64 host (e.g., building a Raspberry Pi-compatible container from your laptop), ensure that QEMU emulation is enabled. Without this, the build will fail with an error such as:
+
+```
+exec /bin/sh: exec format error
+```
+
+To enable QEMU emulation, run:
+
+```bash
+docker run --rm --privileged multiarch/qemu-user-static --reset -p
+```
+
 ## Overview
  This Docker setup includes:
 
@@ -74,4 +88,4 @@ The setup consists of two main containers:
   - Compress old logs
   - Maximum size: 1MB
   
-- **Cron Service**: The cron service is started specifically to ensure proper log rotation functionality. 
+- **Cron Service**: The cron service is started specifically to ensure proper log rotation functionality.

@@ -10,7 +10,18 @@ if [[ -f $pid_file ]]; then
     echo "Removing old rsyslog pid file"
     rm $pid_file
 fi
-service rsyslog start
+
+# Start rsyslog - handle both systemd and SysV init systems
+if command -v systemctl >/dev/null 2>&1; then
+    echo "Starting rsyslog with systemctl..."
+    systemctl start rsyslog || rsyslogd
+elif service rsyslog status >/dev/null 2>&1; then
+    echo "Starting rsyslog with service..."
+    service rsyslog start
+else
+    echo "Starting rsyslogd directly..."
+    rsyslogd
+fi
 
 ##### Cron  #####
 service cron start
